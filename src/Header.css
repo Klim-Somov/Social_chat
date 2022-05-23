@@ -1,5 +1,11 @@
 .header {
+  padding: 10px 0;
   display: flex;
+  justify-content: space-evenly;
+  border-bottom: 0.1px solid lightgray;
+  position: sticky;
+  top: 0;
+  width: 100%;
 }
 .header__search {
   display: flex;
@@ -13,6 +19,9 @@
 }
 .header__left {
   display: flex;
+  align-items: center;
+  flex: 1;
+  margin-left: 5px;
 
 }
 .header__search > input {
@@ -23,7 +32,10 @@
 .header__left > img {
   height: 40px;
   margin-right: 10px;
+  cursor: pointer;
+  
 }
 .header__right {
     display: flex;
+    align-items: center;
 }

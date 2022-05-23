@@ -4,4 +4,14 @@
   color: gray;
   align-items: center;
   font-size: 8px;
+  cursor: pointer;
+  margin-right: 20px;
+  transition: all 0.5s;
+}
+.header-option:hover {
+  color: black
+}
+.header-option > h3 {
+  text-align: center;
+  font-size: 12px;
 }
