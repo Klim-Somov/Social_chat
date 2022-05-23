@@ -1,0 +1,7 @@
+.header-option {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  align-items: center;
+  font-size: 8px;
+}
