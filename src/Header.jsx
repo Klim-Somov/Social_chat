@@ -13,7 +13,7 @@ const Header = () => {
     <div className="header">
       <div className="header__left">
         <img
-          src="https://cdn-icons-png.flaticon.com/512/7560/7560780.png"
+          src="https://cdn-icons-png.flaticon.com/512/7560/7560801.png"
           alt="logo"
         />
         <div className="header__search">
