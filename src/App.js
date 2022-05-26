@@ -10,10 +10,8 @@ function App() {
       <Header />
 
       <div className="App__body">
-       
         <Sidebar />
         <Feed />
-
       </div>
     </div>
   );
