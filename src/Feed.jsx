@@ -20,7 +20,6 @@ function Feed() {
 
   const sendPost = (e) => {
     e.preventDefault();
-
     const newPost = {
       name: "Klim Somov",
       description: "this a test",
@@ -29,15 +28,13 @@ function Feed() {
       timestamp: serverTimestamp(),
       id: Date.now(),
     };
-
+    setInput("");
     set(getpostRefById(newPost.id), newPost);
   };
-  useEffect(() => {
+ useEffect(  () => {
     const unsubscribe = () => {
-      onValue(postRef, (snapshot) => {
-        console.log(snapshot.val());
-
-        setPosts(Object.values(snapshot.val() || {}));
+       onValue(postRef, (snapshot) => {
+      setPosts(Object.values(snapshot.val() || {}));
       });
     };
     return unsubscribe;
@@ -73,15 +70,15 @@ function Feed() {
         msg="message"
         photoUrl="https://avatars.mds.yandex.net/get-zen_doc/1606228/pub_5fa8c7143a59d85105d49b4c_5fa8d9563a59d85105e63258/scale_1200"
       /> */}
-      <div>
-        {<p></p>}
+     
+     
         {posts.map((post) => (
-          <div>
+         
             <Post key={post.id} name={post.name} msg={post.message} />
-         </div>
+         
         ))}
       </div>
-    </div>
+   
   );
 }
 
