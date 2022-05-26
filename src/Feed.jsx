@@ -9,28 +9,39 @@ import EventIcon from "@mui/icons-material/Event";
 import FeedIcon from "@mui/icons-material/Feed";
 import Post from "./Post";
 import { db } from "./firebase";
-import { getDocs, collection } from "firebase/firestore";
+import { onValue, ref, serverTimestamp, set } from "firebase/database";
 
 function Feed() {
-  const [posts, setposts] = useState([]);
-  // const userCollectionRef = collection(db, "posts")
-  
- useEffect(() => {
-  const getPosts = async () => {
-    const data = await getDocs(collection(db, "posts"));
-    setposts(data.docs.map((doc) => ({ 
-      id: doc.id,
-      data: doc.data()
-    })))
-  }
-  getPosts()
- 
- }, [])
- 
-console.log(posts)
+  const [posts, setPosts] = useState([]);
+  const [input, setInput] = useState("");
+
+  const postRef = ref(db, "posts");
+  const getpostRefById = (id) => ref(db, `posts/${id}`);
+
   const sendPost = (e) => {
     e.preventDefault();
+
+    const newPost = {
+      name: "Klim Somov",
+      description: "this a test",
+      message: input,
+      photoUrl: "",
+      timestamp: serverTimestamp(),
+      id: Date.now(),
+    };
+
+    set(getpostRefById(newPost.id), newPost);
   };
+  useEffect(() => {
+    const unsubscribe = () => {
+      onValue(postRef, (snapshot) => {
+        console.log(snapshot.val());
+
+        setPosts(Object.values(snapshot.val() || {}));
+      });
+    };
+    return unsubscribe;
+  }, []);
 
   return (
     <div className="feed">
@@ -38,7 +49,11 @@ console.log(posts)
         <div className="feed__input">
           <CreateIcon />
           <form>
-            <input type="text" />
+            <input
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              type="text"
+            />
             <button onClick={sendPost} type="submit">
               <SendIcon />
             </button>
@@ -52,12 +67,20 @@ console.log(posts)
         </div>
       </div>
 
-      <Post
+      {/* <Post
         name="Klim Somov"
         description="This is the test post"
         msg="message"
         photoUrl="https://avatars.mds.yandex.net/get-zen_doc/1606228/pub_5fa8c7143a59d85105d49b4c_5fa8d9563a59d85105e63258/scale_1200"
-      />
+      /> */}
+      <div>
+        {<p></p>}
+        {posts.map((post) => (
+          <div>
+            <Post key={post.id} name={post.name} msg={post.message} />
+         </div>
+        ))}
+      </div>
     </div>
   );
 }
