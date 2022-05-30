@@ -10,10 +10,13 @@ import FeedIcon from "@mui/icons-material/Feed";
 import Post from "./Post";
 import { db } from "./firebase";
 import { onValue, ref, serverTimestamp, set } from "firebase/database";
+import { selectUser } from "./features/userSlice";
+import { useSelector } from "react-redux";
 
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
+  const user = useSelector(selectUser);
 
   const postRef = ref(db, "posts");
   const getpostRefById = (id) => ref(db, `posts/${id}`);
@@ -21,20 +24,20 @@ function Feed() {
   const sendPost = (e) => {
     e.preventDefault();
     const newPost = {
-      name: "Klim Somov",
-      description: "this a test",
+      name: user?.displayName,
+      description: user.email,
       message: input,
-      photoUrl: "",
+      photoUrl: user?.photoUrl || "",
       timestamp: serverTimestamp(),
       id: Date.now(),
     };
     setInput("");
     set(getpostRefById(newPost.id), newPost);
   };
- useEffect(  () => {
+  useEffect(() => {
     const unsubscribe = () => {
-       onValue(postRef, (snapshot) => {
-      setPosts(Object.values(snapshot.val() || {}));
+      onValue(postRef, (snapshot) => {
+        setPosts(Object.values(snapshot.val() || {}));
       });
     };
     return unsubscribe;
@@ -70,15 +73,16 @@ function Feed() {
         msg="message"
         photoUrl="https://avatars.mds.yandex.net/get-zen_doc/1606228/pub_5fa8c7143a59d85105d49b4c_5fa8d9563a59d85105e63258/scale_1200"
       /> */}
-     
-     
-        {posts.map((post) => (
-         
-            <Post key={post.id} name={post.name} msg={post.message} />
-         
-        ))}
-      </div>
-   
+
+      {posts.reverse().map((post) => (
+        <Post
+          key={post.id}
+          name={post.name}
+          msg={post.message}
+          description={post.description}
+        />
+      ))}
+    </div>
   );
 }
 

@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "./firebase";
 import { useDispatch, useSelector } from "react-redux";
 import { login, selectUser } from "./features/userSlice";
@@ -11,7 +15,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [profilePic, setProfilePic] = useState("");
   const dispatch = useDispatch();
-  
+
   const register = () => {
     if (!name) {
       return alert("Please enter a name");
@@ -40,6 +44,23 @@ function Login() {
   };
   const loginToApp = (e) => {
     e.preventDefault();
+    signInWithEmailAndPassword(auth, email, pass)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        dispatch(
+          login({
+            email: user.email,
+            uid: user.uid,
+            displayName: user.displayName,
+            photoUrl: user.photoURL,
+          })
+        );
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+      });
   };
 
   return (
@@ -57,7 +78,7 @@ function Login() {
         />
         <input
           value={profilePic}
-          onChange={(e) => setProfilePic(e)}
+          onChange={(e) => setProfilePic(e.target.value)}
           type="text"
           placeholder=" url аватара"
         />
