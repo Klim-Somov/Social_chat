@@ -12,7 +12,7 @@ import { db } from "./firebase";
 import { onValue, ref, serverTimestamp, set } from "firebase/database";
 import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
-
+import FlipMove from "react-flip-move"
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
@@ -67,13 +67,8 @@ function Feed() {
         </div>
       </div>
 
-      {/* <Post
-        name="Klim Somov"
-        description="This is the test post"
-        msg="message"
-        photoUrl="https://avatars.mds.yandex.net/get-zen_doc/1606228/pub_5fa8c7143a59d85105d49b4c_5fa8d9563a59d85105e63258/scale_1200"
-      /> */}
-
+      
+<FlipMove>
       {posts.reverse().map((post) => (
         <Post
           key={post.id}
@@ -82,6 +77,8 @@ function Feed() {
           description={post.description}
         />
       ))}
+</FlipMove>
+  
     </div>
   );
 }
