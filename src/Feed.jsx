@@ -12,7 +12,7 @@ import { db } from "./firebase";
 import { onValue, ref, serverTimestamp, set } from "firebase/database";
 import { selectUser } from "./features/userSlice";
 import { useSelector } from "react-redux";
-import FlipMove from "react-flip-move"
+import FlipMove from "react-flip-move";
 function Feed() {
   const [posts, setPosts] = useState([]);
   const [input, setInput] = useState("");
@@ -37,7 +37,9 @@ function Feed() {
   useEffect(() => {
     const unsubscribe = () => {
       onValue(postRef, (snapshot) => {
-        setPosts(Object.values(snapshot.val() || {}));
+        const val = snapshot.val()
+        setPosts(Object.values( val || {}).reverse() );
+       
       });
     };
     return unsubscribe;
@@ -67,18 +69,16 @@ function Feed() {
         </div>
       </div>
 
-      
-<FlipMove>
-      {posts.reverse().map((post) => (
-        <Post
-          key={post.id}
-          name={post.name}
-          msg={post.message}
-          description={post.description}
-        />
-      ))}
-</FlipMove>
-  
+      <FlipMove>
+        {posts.reverse().map((post) => (
+          <Post
+            key={post.id}
+            name={post.name}
+            msg={post.message}
+            description={post.description}
+          />
+        ))}
+      </FlipMove>
     </div>
   );
 }
