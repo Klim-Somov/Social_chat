@@ -17,7 +17,13 @@
   height: 22px;
   color: gray;
   background-color: #eeF3f8;
+  
 }
+@media (max-width: 600px) {
+  .header__search {
+    display: none
+  }
+  }
 .header__left {
   display: flex;
   align-items: center;
