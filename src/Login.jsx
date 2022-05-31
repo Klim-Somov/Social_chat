@@ -6,8 +6,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./firebase";
-import { useDispatch, useSelector } from "react-redux";
-import { login, selectUser } from "./features/userSlice";
+import { useDispatch } from "react-redux";
+import { login } from "./features/userSlice";
 
 function Login() {
   const [name, setName] = useState("");

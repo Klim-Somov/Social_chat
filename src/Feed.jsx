@@ -35,14 +35,11 @@ function Feed() {
     set(getpostRefById(newPost.id), newPost);
   };
   useEffect(() => {
-    const unsubscribe = () => {
-      onValue(postRef, (snapshot) => {
-        const val = snapshot.val()
-        setPosts(Object.values( val || {}).reverse() );
-       
-      });
-      
-    };
+    const unsubscribe = onValue(postRef, (snapshot) => {
+      const val = snapshot.val();
+      setPosts(Object.values(val || {}).reverse());
+    });
+
     return unsubscribe;
   }, []);
 
