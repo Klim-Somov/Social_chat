@@ -41,6 +41,7 @@ function Feed() {
         setPosts(Object.values( val || {}).reverse() );
        
       });
+      
     };
     return unsubscribe;
   }, []);
@@ -69,7 +70,7 @@ function Feed() {
         </div>
       </div>
 
-     
+      <FlipMove>
         {posts.reverse().map((post) => (
           <Post
             key={post.id}
@@ -78,7 +79,7 @@ function Feed() {
             description={post.description}
           />
         ))}
-      
+      </FlipMove>
     </div>
   );
 }

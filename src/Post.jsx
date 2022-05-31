@@ -12,11 +12,11 @@ import InputOption from "./InputOption";
 import "./Post.css";
 
 
-const Post = ({ name, description, msg, photoUrl} ) => {
+const Post = forwardRef(({ name, description, msg, photoUrl }, ref) => {
   const user = useSelector(selectUser);
 
   return (
-    <div className="post">
+    <div ref={ref} className="post">
       <div className="post__header">
         <Avatar src={user.photoUrl}>{name[0]}</Avatar>
         <div className="post__info">
@@ -36,5 +36,5 @@ const Post = ({ name, description, msg, photoUrl} ) => {
     </div>
   );
 }
-
+)
 export default Post;
