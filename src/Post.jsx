@@ -12,7 +12,7 @@ import InputOption from "./InputOption";
 import "./Post.css";
 
 
-const Post = forwardRef(({ name, description, msg, photoUrl }, ref) => {
+const Post = forwardRef(({ name, description, msg }, ref) => {
   const user = useSelector(selectUser);
 
   return (

@@ -68,7 +68,7 @@ function Feed() {
       </div>
 
       <FlipMove>
-        {posts.reverse().map((post) => (
+        {posts.map((post) => (
           <Post
             key={post.id}
             name={post.name}
