@@ -15,5 +15,7 @@
 @media (max-width: 600px) {
   .App__body {
     width: 100%;
+    align-items: center;
+    justify-content: center;
   }
 }
