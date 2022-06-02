@@ -12,13 +12,13 @@ import InputOption from "./InputOption";
 import "./Post.css";
 
 
-const Post = forwardRef(({ name, description, msg }, ref) => {
+const Post = forwardRef(({ name, description, msg, photoUrl }, ref) => {
   const user = useSelector(selectUser);
-
+ 
   return (
     <div ref={ref} className="post">
       <div className="post__header">
-        <Avatar src={user.photoUrl}>{name[0]}</Avatar>
+        <Avatar src={photoUrl}>{name[0]}</Avatar>
         <div className="post__info">
           <h2>{name}</h2>
           <p>{description}</p>

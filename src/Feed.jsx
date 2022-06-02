@@ -74,6 +74,7 @@ function Feed() {
             name={post.name}
             msg={post.message}
             description={post.description}
+            photoUrl = {post.photoUrl}
           />
         ))}
       </FlipMove>
