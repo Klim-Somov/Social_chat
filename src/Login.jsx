@@ -80,7 +80,7 @@ function Login() {
           value={profilePic}
           onChange={(e) => setProfilePic(e.target.value)}
           type="text"
-          placeholder=" url аватара"
+          placeholder=" url аватара / optional"
         />
         <input
           value={email}
@@ -95,7 +95,7 @@ function Login() {
           placeholder="Пароль"
         />
         <button type="submit" onClick={loginToApp}>
-          Зарегистрироваться
+          войти
         </button>
       </form>
 
