@@ -10,4 +10,5 @@ deploy =>  https://social-chat-475d9.web.app/
 - Redux toolkit
 - Firebase auth
 - Realtime Database
+- Firebase hosting
 - Material UI
